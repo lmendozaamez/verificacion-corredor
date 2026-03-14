@@ -1,10 +1,13 @@
 import { useState } from "react";
 
 const USERS = [
-  { user: "tecnico1", pass: "corredor2025" },
-  { user: "tecnico2", pass: "corredor2025" },
-  { user: "admin",    pass: "admin2025"    },
-];
+  process.env.VITE_USER1,
+  process.env.VITE_USER2,
+  process.env.VITE_ADMIN,
+].filter(Boolean).map(entry => {
+  const [user, pass] = entry.split(":");
+  return { user, pass };
+});
 
 export default function Auth({ onLogin }) {
   const [user, setUser] = useState("");
